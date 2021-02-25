@@ -25,4 +25,7 @@ public class Ensalamento {
         this.cafeUm = cafeUm;
         this.cafeDois= cafeDois;
     }
+    public Ensalamento(String idPessoa, int salaUmId, int salaDoisId, int cafeUmId, int cafeDoisId){
+       
+    }
 }

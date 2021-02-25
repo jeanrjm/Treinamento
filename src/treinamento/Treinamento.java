@@ -8,6 +8,7 @@ package treinamento;
 import Funcionalidade.Evento;
 import Funcionalidade.Organizador;
 import InterfaceGrafica.Menu;
+import InterfaceGrafica.splashScreen;
 
 /**
  *
@@ -20,11 +21,9 @@ public class Treinamento {
      */
     public static void main(String[] args) throws Exception {
         //System.out.println("teste");
-        new Menu().setVisible(true);
-       
-   //  new Organizador().alocarNovaPessoa("erts arts");
-      //new Organizador().reAlocarTodos();
-     
+        //new Menu().setVisible(true);
+          new splashScreen().inicializarPrograma();
+       // new Organizador().reAlocarTodos();
     }
     
 }

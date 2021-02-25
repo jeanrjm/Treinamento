@@ -15,12 +15,12 @@ import java.sql.SQLException;
  */
 public class EspacoCafe extends Espaco {
 
-    public EspacoCafe(int id, int lotacao, int lotacaoum, int lotacaodois) {
-        super(id, lotacao, lotacaoum, lotacaodois);
+    public EspacoCafe(int id, String nome, int lotacao) {
+        super(id, nome, lotacao, "cafe");
     }
     
      public EspacoCafe(int id) {
-        super(id);
+        super(id, "cafe");
     }
 
   

@@ -21,8 +21,7 @@ public class Organizador {
     private PreparedStatement stm;
     private String sql;
 
-    private int[] getLocaisVagosNasEtapas(Espaco[] espaco) {
-
+    private int[] getLocaisVagosNasEtapas(Espaco[] espaco) throws Exception {
         int qtdEspacos = espaco.length;
         int[] selecao = new int[2];
         if (espaco.length > 0) {
@@ -34,21 +33,19 @@ public class Organizador {
             //SALA ETAPA 1
             for (int i = 0; i < qtdEspacos; i++) {
                 Espaco atual = espaco[i];
-
                 boolean aceitavel = true;
 
                 int novaLotacao;
-                novaLotacao = atual.lotacaoEtapaUm + 1;
+                novaLotacao = atual.getLotacaoEtapaUm() + 1;
 
-                // System.out.println("Lotacao" + novaLotacao + "MAx" + atual.lotacaoMax);
                 //não excedeu lotacao maxima
-                if (novaLotacao <= atual.lotacaoMax) {
+                if (novaLotacao <= atual.getLotacaoMaxima()) {
 
                     for (int j = 0; j < qtdEspacos; j++) {
 
                         if (j != i) {
                             Espaco comparada = espaco[j];
-                            int compLotacao = comparada.lotacaoEtapaUm + 1;
+                            int compLotacao = comparada.getLotacaoEtapaUm() + 1;
 
                             //Se excedeu a diferença de 1, em relação a qualquer outra sala
                             if (novaLotacao > compLotacao) {
@@ -59,7 +56,7 @@ public class Organizador {
                     }
 
                     if (aceitavel) {
-                        etapaUm = atual.id;
+                        etapaUm = atual.getId();
                         indexSelecaoUm = i;
                         break;
                     }
@@ -67,12 +64,16 @@ public class Organizador {
             }
 
             //SALA ETAPA 2
-            //SE SÓ HOUVER UMA SALA CADASTRADA E HOUVER DISPONIBILIDADE NA ETAPA DOIS, REPETE
             if (etapaUm == 0) {
                 etapaDois = 0;
             } else {
-                if (qtdEspacos < 2 && (espaco[indexSelecaoUm].lotacaoEtapaDois + 1) <= espaco[indexSelecaoUm].lotacaoMax) {
+                //SE SÓ HOUVER UMA SALA CADASTRADA E HOUVER DISPONIBILIDADE NA ETAPA DOIS, REPETE
+                if (qtdEspacos < 2 && (espaco[indexSelecaoUm].getLotacaoEtapaDois() + 1) <= espaco[indexSelecaoUm].getLotacaoMaxima()) {
                     etapaDois = etapaUm;
+                } //´SOMENTE METADE DOS PESSOAS TROCAM DE SALA. VERIFICA SE TEM DISPONIBILIDADE NA ETAPA DOIS PARA REPETIR
+                else if ((espaco[indexSelecaoUm].getLotacaoEtapaUm() + 1) % 2 != 0 && (espaco[indexSelecaoUm].getLotacaoEtapaDois() + 1) <= espaco[indexSelecaoUm].getLotacaoMaxima()) {
+                    etapaDois = etapaUm;
+                  
                 } else {
                     for (int i = 0; i < qtdEspacos; i++) {
 
@@ -80,14 +81,14 @@ public class Organizador {
 
                         boolean aceitavel = true;
                         int novaLotacao;
-                        novaLotacao = atual.lotacaoEtapaDois + 1;
+                        novaLotacao = atual.getLotacaoEtapaDois() + 1;
 
-                        if (novaLotacao <= atual.lotacaoMax) {
+                        if (novaLotacao <= atual.getLotacaoMaxima()) {
                             //não excedeu lotacao maxima
                             for (int j = 0; j < qtdEspacos; j++) {
                                 if (j != i) {
                                     Espaco comparada = espaco[j];
-                                    int compLotacao = comparada.lotacaoEtapaDois + 1;
+                                    int compLotacao = comparada.getLotacaoEtapaDois() + 1;
 
                                     //Se excedeu a diferença de 1, em relação a aqualquer outra sala, para e comparar de imediato
                                     if (novaLotacao > compLotacao) {
@@ -98,13 +99,13 @@ public class Organizador {
                             }
                             //SE TEM ESPACO POREM É O MESMO LOCAL DA ETAPA 1, NÃO É ACEITAVEL 
                             //POREM SE NÃO HOUVER OUTRA POSSIBILIDADE É AUTORIZADO A REPETIR, JA QUE NÃO EXEDE DIFERENÇA 
-                            if (atual.id == etapaUm) {
+                            if (atual.getId() == etapaUm) {
                                 aceitavel = false;
                                 repetivel = true;
                             }
 
                             if (aceitavel) {
-                                etapaDois = atual.id;
+                                etapaDois = atual.getId();
                                 break;
                             }
                         }
@@ -126,12 +127,13 @@ public class Organizador {
             selecao[1] = 0;
             return selecao;
         }
+
     }
 
-    public void alocarNovaPessoa(String nomecompleto) {
+    public void alocarNovaPessoa(String nomecompleto, Connection conexao) throws Exception {
 
         try {
-            conexao = new Conexao().criarConexao();
+
             int pessoaId = 0;
 
             sql = "SELECT id FROM pessoas WHERE nomecompleto = ? ;";
@@ -182,99 +184,45 @@ public class Organizador {
 
             }
 
-            conexao.close();
+            //conexao.close();
         } catch (Exception e) {
-            System.out.println("Não fez ensalamento");
+            throw new Exception(e.getMessage() + " Falha ao alocar pessoa: " + nomecompleto);
         }
     }
 
     public void reAlocarTodos() throws Exception {
-        conexao = new Conexao().criarConexao();
-        Evento evento = new Evento();
 
-        sql = "DELETE FROM ensalamento";
-        stm = conexao.prepareStatement(sql);
-        stm.execute();
-
-        ArrayList<Pessoa> pessoas = evento.getPessoas();
-
-        for (Pessoa pessoa : pessoas) {
-
-            alocarNovaPessoa(pessoa.nomecompleto);
-
-        }
-
-    }
-
-    public Ensalamento getEnsalamentoPessoa(int id) {
         try {
             conexao = new Conexao().criarConexao();
-            sql = "SELECT p.nome, p.sobrenome, e.salaUm, e.salaDois, e.cafeUm, e.cafeDois FROM pessoas p INNER JOIN ensalamento e ON p.id = e.pessoa WHERE p.id = ?;";
-            //sql="SELECT p.nome, p.sobrenome, i.nome as salum, j.nome as sadois, x.nome as cafum, y.nome as cafdois FROM pessoas p INNER JOIN ensalamento e ON p.id = e.pessoa INNER JOIN salas i ON e.salaUm = i.id INNER JOIN salas j ON e.salaDois = j.id INNER JOIN cafe x ON e.cafeUm = x.id INNER JOIN cafe y ON e.cafeDois = y.id WHERE p.id = ?";
-            stm = conexao.prepareStatement(sql);
-            stm.setInt(1, id);
-            ResultSet res = stm.executeQuery();
-
-            res.next();
-            String nome = res.getString(1);
-            String sobrenome = res.getString(2);
-            int salaUm = res.getInt(3);
-            int salaDois = res.getInt(4);
-            int cafeUm = res.getInt(5);
-            int cafeDois = res.getInt(6);
-            
-            String salUm;
-            String salDois;
-            String cafUm;
-            String cafDois;
-
-            if (salaUm == 0) {
-                salUm = "SEM ALOCAÇÃO";
-            } else {
-                sql = "SELECT nome FROM salas WHERE id = ?;";
-                stm = conexao.prepareStatement(sql);
-                stm.setInt(1, salaUm);
-                res = stm.executeQuery(); 
-                res.next();
-                salUm = res.getString(1);
-            }
-            if (salaDois == 0) {
-                salDois = "SEM ALOCAÇÃO";
-            } else {
-                sql = "SELECT nome FROM salas WHERE id = ?;";
-                stm = conexao.prepareStatement(sql);
-                stm.setInt(1, salaDois);
-                res = stm.executeQuery(); 
-                res.next();
-                salDois = res.getString(1);
-            }
-            
-            if (cafeUm == 0) {
-                cafUm = "SEM ALOCAÇÃO";
-            } else {
-                sql = "SELECT nome FROM cafe WHERE id = ?;";
-                stm = conexao.prepareStatement(sql);
-                stm.setInt(1, cafeUm);
-                res = stm.executeQuery(); 
-                res.next();
-                cafUm = res.getString(1);
-            }
-            if (cafeDois == 0) {
-                cafDois = "SEM ALOCAÇÃO";
-            } else {
-                sql = "SELECT nome FROM cafe WHERE id = ?;";
-                stm = conexao.prepareStatement(sql);
-                stm.setInt(1, cafeDois);
-                res = stm.executeQuery(); 
-                res.next();
-                cafDois = res.getString(1);
-            }
-            Ensalamento ensalamento = new Ensalamento(nome, sobrenome, salUm, salDois, cafUm, cafDois);
-            return ensalamento;
 
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
+
+        Evento evento = new Evento();
+        System.out.println("Iniciando re-organização");
+        try {
+            sql = "DELETE FROM ensalamento";
+            stm = conexao.prepareStatement(sql);
+            stm.execute();
+            
+            ArrayList<Pessoa> pessoas = evento.getPessoas();
+            int nPessoas = pessoas.size();
+            if (nPessoas > 0) {
+                for (Pessoa pessoa : pessoas) {
+
+                    alocarNovaPessoa(pessoa.getNomeCompleto(), conexao);
+
+                }
+            }
+            System.out.println("Re-organização completada");
+            conexao.close();
+
+        } catch (Exception e) {
+            conexao.close();
+            throw new Exception(e.getMessage());
+        }
+
     }
 }

@@ -17,17 +17,13 @@ import javax.swing.ImageIcon;
  * @author Jean
  */
 public class CadastroSala extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadastroSala
-     */
     public CadastroSala() {
         setTitle("Cadastrar sala");
         setResizable(false);
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon(getClass().getResource("icol.png")).getImage());
         initComponents();
-      
+
         campoNome.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 descrStatus.setText("");
@@ -49,6 +45,7 @@ public class CadastroSala extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if (!campoNome.getText().isEmpty() && !campoLotacao.getText().isEmpty()) {
+
                     try {
                         new Evento().cadastrarNovaSala(campoNome.getText(), campoLotacao.getText());
                         descrStatus.setText(campoNome.getText() + " cadastrado com sucesso");
@@ -56,6 +53,7 @@ public class CadastroSala extends javax.swing.JFrame {
                         campoLotacao.setText("");
 
                     } catch (Exception i) {
+
                         descrStatus.setText(i.getMessage());
                     }
                 } else {
@@ -78,8 +76,8 @@ public class CadastroSala extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
         campoLotacao = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        descrCampoNome = new javax.swing.JLabel();
+        descrCampoLotacao = new javax.swing.JLabel();
         cadastrarSala = new javax.swing.JButton();
         descrStatus = new javax.swing.JLabel();
 
@@ -87,9 +85,9 @@ public class CadastroSala extends javax.swing.JFrame {
 
         jLabel1.setText("Cadastrar Sala");
 
-        jLabel2.setText("Nome");
+        descrCampoNome.setText("Nome");
 
-        jLabel3.setText("Lotação");
+        descrCampoLotacao.setText("Lotação");
 
         cadastrarSala.setText("Cadastrar");
 
@@ -107,12 +105,12 @@ public class CadastroSala extends javax.swing.JFrame {
                         .addComponent(cadastrarSala)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
+                                .addComponent(descrCampoNome)
                                 .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(20, 20, 20)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
+                                    .addComponent(descrCampoLotacao)
                                     .addGap(31, 31, 31))
                                 .addComponent(campoLotacao))))
                     .addComponent(descrStatus))
@@ -125,8 +123,8 @@ public class CadastroSala extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(descrCampoNome)
+                    .addComponent(descrCampoLotacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,9 +178,9 @@ public class CadastroSala extends javax.swing.JFrame {
     private javax.swing.JButton cadastrarSala;
     private javax.swing.JTextField campoLotacao;
     private javax.swing.JTextField campoNome;
+    private javax.swing.JLabel descrCampoLotacao;
+    private javax.swing.JLabel descrCampoNome;
     private javax.swing.JLabel descrStatus;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

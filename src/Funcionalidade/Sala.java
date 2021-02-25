@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class Sala extends Espaco {
 
-    public Sala(int id, int lotacao, int lotacaoum, int lotacaodois) {
-        super(id, lotacao, lotacaoum, lotacaodois);
-
+    public Sala(int id, String nome, int lotacao) {
+        super(id, nome, lotacao, "sala");
+       
     }
 
     public Sala(int id) {
-        super(id);
+        super(id, "sala");
     }
 }

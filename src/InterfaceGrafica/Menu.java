@@ -43,11 +43,10 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        setTitle("Sistema Treinamento | Jean Ricardo");
+        setTitle("Sistema Gerenciador do Treinamento");
         setResizable(false);
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon(getClass().getResource("icol.png")).getImage());
-        
         initComponents();
         
         
@@ -55,7 +54,13 @@ public class Menu extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new CadastroPessoa().setVisible(true);
-
+            }
+        });
+        
+        cadastrarPessoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CadastroPessoa().setVisible(true);
             }
         });
         
@@ -66,11 +71,59 @@ public class Menu extends javax.swing.JFrame {
 
             }
         });
+         consultarPessoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultaPessoas().setVisible(true);
+
+            }
+        });
+        
+        salasConsultar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultaSalas().setVisible(true);
+
+            }
+        });
+        
+        consultarSala.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultaSalas().setVisible(true);
+
+            }
+        });
+        
+        
         
         salasCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new CadastroSala().setVisible(true);
+
+            }
+        });
+        cadastrarSala.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CadastroSala().setVisible(true);
+
+            }
+        });
+        
+         espacosConsultar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultaCafes().setVisible(true);
+
+            }
+        });
+         
+         consultarCafe.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ConsultaCafes().setVisible(true);
 
             }
         });
@@ -81,6 +134,14 @@ public class Menu extends javax.swing.JFrame {
 
             }
         });
+         cadastrarCafe.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CadastroEspacoCafe().setVisible(true);
+
+            }
+        });
+        
     }
 
     /**
@@ -92,90 +153,159 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        consultarPessoa = new javax.swing.JButton();
+        cadastrarPessoa = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        consultarSala = new javax.swing.JButton();
+        cadastrarSala = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        consultarCafe = new javax.swing.JButton();
+        cadastrarCafe = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         botaoPessoas = new javax.swing.JMenu();
-        pessoasConsultar = new javax.swing.JMenuItem();
+        cads = new javax.swing.JMenu();
         pessoasCadastrar = new javax.swing.JMenuItem();
-        botaoLocais = new javax.swing.JMenu();
-        botaoEspacosCafe = new javax.swing.JMenu();
-        espacosConsultar = new javax.swing.JMenuItem();
-        espacosCadastrar = new javax.swing.JMenuItem();
-        botaoSalas = new javax.swing.JMenu();
-        salasConsultar = new javax.swing.JMenuItem();
         salasCadastrar = new javax.swing.JMenuItem();
+        espacosCadastrar = new javax.swing.JMenuItem();
+        consultas = new javax.swing.JMenu();
+        pessoasConsultar = new javax.swing.JMenuItem();
+        salasConsultar = new javax.swing.JMenuItem();
+        espacosConsultar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Selecione a categoria e então o que deseja fazer.");
+        consultarPessoa.setText("Consultar");
+        consultarPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarPessoaActionPerformed(evt);
+            }
+        });
+
+        cadastrarPessoa.setText("Cadastrar Nova");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cadastrarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(consultarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(cadastrarPessoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(consultarPessoa)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cadastrar", jPanel1);
+        jTabbedPane1.addTab("Pessoas", jPanel1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+        consultarSala.setText("Consultar");
+        consultarSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarSalaActionPerformed(evt);
+            }
+        });
+
+        cadastrarSala.setText("Cadastrar Nova");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cadastrarSala, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(consultarSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(cadastrarSala)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(consultarSala)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Consultar", jPanel2);
+        jTabbedPane1.addTab("Salas", jPanel3);
 
-        botaoPessoas.setText("Pessoas");
+        consultarCafe.setText("Consultar");
+        consultarCafe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarCafeActionPerformed(evt);
+            }
+        });
 
-        pessoasConsultar.setText("Consultar");
-        botaoPessoas.add(pessoasConsultar);
+        cadastrarCafe.setText("Cadastrar Novo");
 
-        pessoasCadastrar.setText("Cadastrar");
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cadastrarCafe, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(consultarCafe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(cadastrarCafe)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(consultarCafe)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Espaços do Café", jPanel4);
+
+        botaoPessoas.setText("Ferramentas");
+
+        cads.setText("Cadastrar");
+
+        pessoasCadastrar.setText("Cadastrar Pessoa");
         pessoasCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pessoasCadastrarActionPerformed(evt);
             }
         });
-        botaoPessoas.add(pessoasCadastrar);
+        cads.add(pessoasCadastrar);
+
+        salasCadastrar.setText("Cadastrar Sala");
+        cads.add(salasCadastrar);
+
+        espacosCadastrar.setText("Cadastrar Espaço do Café");
+        cads.add(espacosCadastrar);
+
+        botaoPessoas.add(cads);
+
+        consultas.setText("Consultar");
+
+        pessoasConsultar.setText("Consultar Pessoas");
+        consultas.add(pessoasConsultar);
+
+        salasConsultar.setText("Consultar Salas");
+        consultas.add(salasConsultar);
+
+        espacosConsultar.setText("Consultar Espaços do Café");
+        consultas.add(espacosConsultar);
+
+        botaoPessoas.add(consultas);
 
         jMenuBar1.add(botaoPessoas);
-
-        botaoLocais.setText("Locais");
-
-        botaoEspacosCafe.setText("Espaços de café");
-
-        espacosConsultar.setText("Consultar");
-        botaoEspacosCafe.add(espacosConsultar);
-
-        espacosCadastrar.setText("Cadastrar");
-        botaoEspacosCafe.add(espacosCadastrar);
-
-        botaoLocais.add(botaoEspacosCafe);
-
-        botaoSalas.setText("Salas");
-
-        salasConsultar.setText("Consultar");
-        botaoSalas.add(salasConsultar);
-
-        salasCadastrar.setText("Cadastrar");
-        botaoSalas.add(salasCadastrar);
-
-        botaoLocais.add(botaoSalas);
-
-        jMenuBar1.add(botaoLocais);
 
         setJMenuBar(jMenuBar1);
 
@@ -185,21 +315,15 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,6 +332,18 @@ public class Menu extends javax.swing.JFrame {
     private void pessoasCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pessoasCadastrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pessoasCadastrarActionPerformed
+
+    private void consultarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarPessoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultarPessoaActionPerformed
+
+    private void consultarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultarSalaActionPerformed
+
+    private void consultarCafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarCafeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultarCafeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,16 +381,21 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu botaoEspacosCafe;
-    private javax.swing.JMenu botaoLocais;
     private javax.swing.JMenu botaoPessoas;
-    private javax.swing.JMenu botaoSalas;
+    private javax.swing.JButton cadastrarCafe;
+    private javax.swing.JButton cadastrarPessoa;
+    private javax.swing.JButton cadastrarSala;
+    private javax.swing.JMenu cads;
+    private javax.swing.JButton consultarCafe;
+    private javax.swing.JButton consultarPessoa;
+    private javax.swing.JButton consultarSala;
+    private javax.swing.JMenu consultas;
     private javax.swing.JMenuItem espacosCadastrar;
     private javax.swing.JMenuItem espacosConsultar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem pessoasCadastrar;
     private javax.swing.JMenuItem pessoasConsultar;

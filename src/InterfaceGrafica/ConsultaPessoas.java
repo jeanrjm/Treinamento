@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultaPessoas extends javax.swing.JFrame {
 
-    int[] ids;
+    private int[] ids;
 
     DefaultTableModel modelo = new DefaultTableModel();
 
@@ -63,8 +63,8 @@ public class ConsultaPessoas extends javax.swing.JFrame {
 
             int id = ids[indexSelecionado - 1];
 
-            Organizador or = new Organizador();
-            Ensalamento ens = or.getEnsalamentoPessoa(id);
+            Pessoa p = new Pessoa(id);
+            Ensalamento ens = p.getEnsalamentoComNomes();
 
             Vector row = new Vector();
             row.add(ens.nome);
@@ -119,7 +119,7 @@ public class ConsultaPessoas extends javax.swing.JFrame {
         tabelaDados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         listaPessoas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -136,7 +136,8 @@ public class ConsultaPessoas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaDados);
 
-        jLabel1.setText("Consultar Pessoa");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Pessoas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,10 +159,10 @@ public class ConsultaPessoas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(listaPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
