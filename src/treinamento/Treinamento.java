@@ -20,10 +20,9 @@ public class Treinamento {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        //System.out.println("teste");
-        //new Menu().setVisible(true);
+        
           new splashScreen().inicializarPrograma();
-       // new Organizador().reAlocarTodos();
+      
     }
     
 }

@@ -21,10 +21,10 @@ public class Pessoa {
     private Connection conexao;
     private PreparedStatement stm;
     private String sql;
-    int id;
-    String nome;
-    String sobrenome;
-    String nomecompleto;
+    private int id;
+    private String nome;
+    private String sobrenome;
+    private String nomecompleto;
 
     public String getNomeCompleto() {
         return this.nomecompleto;

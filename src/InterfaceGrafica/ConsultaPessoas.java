@@ -29,10 +29,10 @@ public class ConsultaPessoas extends javax.swing.JFrame {
     public void preparaTabela() {
         modelo.addColumn("Nome");
         modelo.addColumn("Sobrenome");
-        modelo.addColumn("Sala Etapa 1");
-        modelo.addColumn("Cafe Etapa 1");
-        modelo.addColumn("Sala Etapa 2");
-        modelo.addColumn("Cafe Etapa 2");
+        modelo.addColumn("Sala na Etapa 1");
+        modelo.addColumn("Cafe na Etapa 1");
+        modelo.addColumn("Sala na Etapa 2");
+        modelo.addColumn("Cafe na Etapa 2");
     }
 
     public void listarPessoas() throws Exception {

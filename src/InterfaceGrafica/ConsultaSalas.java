@@ -26,8 +26,8 @@ public class ConsultaSalas extends javax.swing.JFrame {
     DefaultTableModel modeloEtDois = new DefaultTableModel();
 
     public void preparaTabelas() {
-        modeloEtUm.addColumn("Pessoas Etapa Um");
-        modeloEtDois.addColumn("Pessoas Etapa Dois");
+        modeloEtUm.addColumn("Pessoas na Etapa 1");
+        modeloEtDois.addColumn("Pessoas na Etapa 2");
 
     }
 

@@ -5,6 +5,8 @@
  */
 package InterfaceGrafica;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,6 +25,24 @@ public class splashScreen extends javax.swing.JFrame {
     private String sql;
 
     public splashScreen() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
         setUndecorated(true);
         setTitle("Sistema Gerenciador do Treinamento");
         setResizable(false);
@@ -30,6 +50,16 @@ public class splashScreen extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("icol.png")).getImage());
         initComponents();
         setVisible(true);
+        
+        fechar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             
+                System.exit(0);
+            }
+
+        });
+        
 
     }
 
@@ -51,10 +81,12 @@ public class splashScreen extends javax.swing.JFrame {
                 inicializado = true;
                 
             } catch (Exception e) {
-                descrStatus.setText("Não coneseguiu se conectar");
+                descrStatus.setText("Não conseguiu se conectar a base de dados.");
+                Thread.sleep(500);
+                descrStatus.setText("Tentando novamente...");
             }
         }
-        descrStatus.setText("Sucesso");
+        descrStatus.setText("Inicializado com sucesso");
         Thread.sleep(500);
         new Menu().setVisible(true);
         this.dispose();
@@ -73,51 +105,52 @@ public class splashScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         descrStatus = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        fechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(140, 140, 140));
         setForeground(java.awt.Color.lightGray);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(81, 81, 81));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        descrStatus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         descrStatus.setForeground(new java.awt.Color(52, 171, 235));
         descrStatus.setText("Inicializando...");
+        jPanel1.add(descrStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 271, -1, -1));
 
         titulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         titulo.setForeground(new java.awt.Color(52, 171, 235));
         titulo.setText("Sistema Gerenciador do Treinamento");
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 109, 294, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titulo)
-                    .addComponent(descrStatus))
-                .addContainerGap(85, Short.MAX_VALUE))
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(52, 171, 235));
+        jLabel1.setText("por Jean Ricardo Jaques Moraes");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 137, 294, -1));
+
+        jPanel2.setBackground(new java.awt.Color(52, 171, 235));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 11, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
-                .addComponent(titulo)
-                .addGap(91, 91, 91)
-                .addComponent(descrStatus)
-                .addGap(64, 64, 64))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 306));
+
+        fechar.setText("Fechar");
+        jPanel1.add(fechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,7 +192,10 @@ public class splashScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel descrStatus;
+    private javax.swing.JButton fechar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
