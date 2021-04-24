@@ -41,3 +41,5 @@ Para consultar um Espaço de Café:
 	Clique na opção "Espaços do Café" e em seguida em "Consultar" ou em Ferramentas>Consultar>Consultar Espaços do Café.
 	Selecione o Espaço do Café.
 	
+-Testando dkgt
+	
